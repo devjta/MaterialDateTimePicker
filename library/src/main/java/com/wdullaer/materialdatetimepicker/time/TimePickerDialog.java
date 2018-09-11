@@ -1023,6 +1023,10 @@ public class TimePickerDialog extends DialogFragment implements
 
         mTimePicker.setBackgroundColor(mThemeDark? lightGray : circleBackground);
         view.findViewById(R.id.mdtp_time_picker_dialog).setBackgroundColor(mThemeDark ? darkBackgroundColor : backgroundColor);
+
+        if(getDialog() != null){
+            getDialog().setCanceledOnTouchOutside(true);
+        }
         return view;
     }
 
