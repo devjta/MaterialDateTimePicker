@@ -48,6 +48,7 @@ import com.wdullaer.materialdatetimepicker.HapticFeedbackController;
 import com.wdullaer.materialdatetimepicker.R;
 import com.wdullaer.materialdatetimepicker.TypefaceHelper;
 import com.wdullaer.materialdatetimepicker.Utils;
+import com.wdullaer.materialdatetimepicker.common.NegativeDialogFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -59,7 +60,7 @@ import java.util.TimeZone;
 /**
  * Dialog allowing users to select a date.
  */
-public class DatePickerDialog extends DialogFragment implements
+public class DatePickerDialog extends NegativeDialogFragment implements
         OnClickListener, DatePickerController {
 
     public enum Version {
@@ -432,7 +433,11 @@ public class DatePickerDialog extends DialogFragment implements
             @Override
             public void onClick(View v) {
                 tryVibrate();
-                if (getDialog() != null) getDialog().cancel();
+                if(cancelInvokeNegative){
+                    notifyNegativeListener();
+                    dismiss();
+                }
+                else if (getDialog() != null) getDialog().cancel();
             }
         });
         cancelButton.setTypeface(TypefaceHelper.get(activity, buttonTypeface));

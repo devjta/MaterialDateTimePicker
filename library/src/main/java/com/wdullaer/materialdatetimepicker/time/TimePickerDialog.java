@@ -50,6 +50,7 @@ import com.wdullaer.materialdatetimepicker.HapticFeedbackController;
 import com.wdullaer.materialdatetimepicker.R;
 import com.wdullaer.materialdatetimepicker.TypefaceHelper;
 import com.wdullaer.materialdatetimepicker.Utils;
+import com.wdullaer.materialdatetimepicker.common.NegativeDialogFragment;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout.OnValueSelectedListener;
 
 import java.text.DateFormatSymbols;
@@ -61,7 +62,7 @@ import java.util.Locale;
 /**
  * Dialog to set a time.
  */
-public class TimePickerDialog extends DialogFragment implements
+public class TimePickerDialog extends NegativeDialogFragment implements
         OnValueSelectedListener, TimePickerController {
     private static final String TAG = "TimePickerDialog";
 
@@ -782,7 +783,12 @@ public class TimePickerDialog extends DialogFragment implements
             @Override
             public void onClick(View v) {
                 tryVibrate();
-                if (getDialog() != null) getDialog().cancel();
+                if(cancelInvokeNegative){
+                    notifyNegativeListener();
+                    dismiss();
+                    return;
+                }
+                else if (getDialog() != null) getDialog().cancel();
             }
         });
         mCancelButton.setTypeface(TypefaceHelper.get(context, buttonTypeface));
@@ -1024,9 +1030,7 @@ public class TimePickerDialog extends DialogFragment implements
         mTimePicker.setBackgroundColor(mThemeDark? lightGray : circleBackground);
         view.findViewById(R.id.mdtp_time_picker_dialog).setBackgroundColor(mThemeDark ? darkBackgroundColor : backgroundColor);
 
-        if(getDialog() != null){
-            getDialog().setCanceledOnTouchOutside(true);
-        }
+
         return view;
     }
 
