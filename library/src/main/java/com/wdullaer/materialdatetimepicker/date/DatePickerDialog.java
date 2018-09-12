@@ -443,7 +443,12 @@ public class DatePickerDialog extends NegativeDialogFragment implements
         cancelButton.setTypeface(TypefaceHelper.get(activity, buttonTypeface));
         if (mCancelString != null) cancelButton.setText(mCancelString);
         else cancelButton.setText(mCancelResid);
-        cancelButton.setVisibility(isCancelable() ? View.VISIBLE : View.GONE);
+        if(cancelInvokeNegative){
+            cancelButton.setVisibility(isNegativeable() ? View.VISIBLE : View.GONE);
+        }
+        else {
+            cancelButton.setVisibility(isCancelable() ? View.VISIBLE : View.GONE);
+        }
 
         // If an accent color has not been set manually, get it from the context
         if (mAccentColor == -1) {

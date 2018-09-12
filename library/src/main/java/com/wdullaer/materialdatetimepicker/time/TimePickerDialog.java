@@ -794,7 +794,12 @@ public class TimePickerDialog extends NegativeDialogFragment implements
         mCancelButton.setTypeface(TypefaceHelper.get(context, buttonTypeface));
         if(mCancelString != null) mCancelButton.setText(mCancelString);
         else mCancelButton.setText(mCancelResid);
-        mCancelButton.setVisibility(isCancelable() ? View.VISIBLE : View.GONE);
+        if(cancelInvokeNegative){
+            mCancelButton.setVisibility(isNegativeable() ? View.VISIBLE : View.GONE);
+        }
+        else {
+            mCancelButton.setVisibility(isCancelable() ? View.VISIBLE : View.GONE);
+        }
 
         // Enable or disable the AM/PM view.
         if (mIs24HourMode) {
