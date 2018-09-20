@@ -1,6 +1,6 @@
 package com.wdullaer.materialdatetimepicker.common;
 
-import android.app.DialogFragment;
+import android.support.v4.app.DialogFragment;
 import android.content.DialogInterface;
 
 /**
