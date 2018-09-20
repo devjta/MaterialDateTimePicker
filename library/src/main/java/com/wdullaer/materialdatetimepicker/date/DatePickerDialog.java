@@ -598,10 +598,10 @@ public class DatePickerDialog extends NegativeDialogFragment implements
         if (mVersion == Version.VERSION_1) {
             if (mDatePickerHeaderView != null) {
                 if (mTitle != null)
-                    mDatePickerHeaderView.setText(mTitle.toUpperCase(mLocale));
+                    mDatePickerHeaderView.setText(mTitle);
                 else {
                     mDatePickerHeaderView.setText(mCalendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG,
-                            mLocale).toUpperCase(mLocale));
+                            mLocale));
                 }
             }
             mSelectedMonthTextView.setText(MONTH_FORMAT.format(mCalendar.getTime()));
