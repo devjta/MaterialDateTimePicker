@@ -25,10 +25,12 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.DialogFragment;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -45,7 +47,6 @@ import android.widget.TextView;
 
 import com.wdullaer.materialdatetimepicker.HapticFeedbackController;
 import com.wdullaer.materialdatetimepicker.R;
-import com.wdullaer.materialdatetimepicker.TypefaceHelper;
 import com.wdullaer.materialdatetimepicker.Utils;
 import com.wdullaer.materialdatetimepicker.common.NegativeDialogFragment;
 
@@ -253,7 +254,7 @@ public class DatePickerDialog extends NegativeDialogFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Activity activity = getActivity();
+        final Activity activity = requireActivity();
         activity.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         mCurrentView = UNINITIALIZED;
@@ -310,7 +311,7 @@ public class DatePickerDialog extends NegativeDialogFragment implements
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         int listPosition = -1;
         int listPositionOffset = 0;
@@ -381,7 +382,7 @@ public class DatePickerDialog extends NegativeDialogFragment implements
         mYearView = view.findViewById(R.id.mdtp_date_picker_year);
         mYearView.setOnClickListener(this);
 
-        final Activity activity = getActivity();
+        final Activity activity = requireActivity();
         mDayPickerView = new DayPickerGroup(activity, this);
         mYearPickerView = new YearPickerView(activity, this);
 
@@ -413,7 +414,6 @@ public class DatePickerDialog extends NegativeDialogFragment implements
         animation2.setDuration(ANIMATION_DURATION);
         mAnimator.setOutAnimation(animation2);
 
-        String buttonTypeface = activity.getResources().getString(R.string.mdtp_button_typeface);
         Button okButton = view.findViewById(R.id.mdtp_ok);
         okButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -423,7 +423,7 @@ public class DatePickerDialog extends NegativeDialogFragment implements
                 dismiss();
             }
         });
-        okButton.setTypeface(TypefaceHelper.get(activity, buttonTypeface));
+        okButton.setTypeface(ResourcesCompat.getFont(activity, R.font.robotomedium));
         if (mOkString != null) okButton.setText(mOkString);
         else okButton.setText(mOkResid);
 
@@ -439,7 +439,7 @@ public class DatePickerDialog extends NegativeDialogFragment implements
                 else if (getDialog() != null) getDialog().cancel();
             }
         });
-        cancelButton.setTypeface(TypefaceHelper.get(activity, buttonTypeface));
+        cancelButton.setTypeface(ResourcesCompat.getFont(activity, R.font.robotomedium));
         if (mCancelString != null) cancelButton.setText(mCancelString);
         else cancelButton.setText(mCancelResid);
         if(cancelInvokeNegative){
@@ -487,12 +487,12 @@ public class DatePickerDialog extends NegativeDialogFragment implements
         ViewGroup viewGroup = (ViewGroup) getView();
         if (viewGroup != null) {
             viewGroup.removeAllViewsInLayout();
-            View view = onCreateView(getActivity().getLayoutInflater(), viewGroup, null);
+            View view = onCreateView(requireActivity().getLayoutInflater(), viewGroup, null);
             viewGroup.addView(view);
         }
     }
 
-    @Override
+    @Override @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

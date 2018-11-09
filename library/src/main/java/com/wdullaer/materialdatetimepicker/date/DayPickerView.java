@@ -20,10 +20,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -121,13 +121,10 @@ public abstract class DayPickerView extends RecyclerView implements OnDateChange
         int gravity = scrollOrientation == DatePickerDialog.ScrollOrientation.VERTICAL
                 ? Gravity.TOP
                 : Gravity.START;
-        GravitySnapHelper helper = new GravitySnapHelper(gravity, new GravitySnapHelper.SnapListener() {
-            @Override
-            public void onSnap(int position) {
-                // Leverage the fact that the SnapHelper figures out which position is shown and
-                // pass this on to our PageListener after the snap has happened
-                if (pageListener != null) pageListener.onPageChanged(position);
-            }
+        GravitySnapHelper helper = new GravitySnapHelper(gravity, position -> {
+            // Leverage the fact that the SnapHelper figures out which position is shown and
+            // pass this on to our PageListener after the snap has happened
+            if (pageListener != null) pageListener.onPageChanged(position);
         });
         helper.attachToRecyclerView(this);
     }
@@ -242,12 +239,9 @@ public abstract class DayPickerView extends RecyclerView implements OnDateChange
 
     public void postSetSelection(final int position) {
         clearFocus();
-        post(new Runnable() {
-            @Override
-            public void run() {
-                ((LinearLayoutManager) getLayoutManager()).scrollToPositionWithOffset(position, 0);
-                if (pageListener != null) pageListener.onPageChanged(position);
-            }
+        post(() -> {
+            ((LinearLayoutManager) getLayoutManager()).scrollToPositionWithOffset(position, 0);
+            if (pageListener != null) pageListener.onPageChanged(position);
         });
     }
 

@@ -17,15 +17,19 @@
 package com.wdullaer.materialdatetimepicker.date;
 
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.Calendar;
 
 @SuppressWarnings("WeakerAccess")
 public interface DateRangeLimiter extends Parcelable {
-    int getMinYear();
+    default int getMinYear() {
+        return getStartDate().get(Calendar.YEAR);
+    }
 
-    int getMaxYear();
+    default int getMaxYear() {
+        return getEndDate().get(Calendar.YEAR);
+    }
 
     @NonNull Calendar getStartDate();
 
