@@ -1,6 +1,5 @@
 package com.wdullaer.datetimepickerexample;
 
-import android.support.v4.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
