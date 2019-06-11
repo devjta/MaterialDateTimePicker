@@ -33,7 +33,7 @@
         android:layout_marginEnd="8dp"
         android:ellipsize="end"
         style="@style/mdtp_ActionButton.Text"
-        android:text="string/mdtp_cancel asdfasfasdf" />
+        android:text="@string/mdtp_cancel" />
 
     <Button
         android:id="@+id/mdtp_ok"
@@ -44,5 +44,5 @@
         android:layout_marginEnd="16dp"
         android:ellipsize="end"
         style="@style/mdtp_ActionButton.Text"
-        android:text="string/mdtp_ok sajdkfjasdkfjskajfsd" />
+        android:text="@string/mdtp_ok" />
 </LinearLayout>
