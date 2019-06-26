@@ -142,10 +142,12 @@ public class DatePickerDialog extends NegativeDialogFragment implements
     private int mDefaultView = MONTH_AND_DAY_VIEW;
     private int mOkResid = R.string.mdtp_ok;
     private String mOkString;
-    private int mOkColor, mOkEms = -1;
+    private int mOkColor = -1;
+    private int mOkEms = -1;
     private int mCancelResid = R.string.mdtp_cancel;
     private String mCancelString;
-    private int mCancelColor, mCancelEms = -1;
+    private int mCancelColor = -1;
+    private int mCancelEms = -1;
     private Version mVersion;
     private ScrollOrientation mScrollOrientation;
     private TimeZone mTimezone;
@@ -426,6 +428,9 @@ public class DatePickerDialog extends NegativeDialogFragment implements
         okButton.setTypeface(TypefaceHelper.get(activity, buttonTypeface));
         if (mOkString != null) okButton.setText(mOkString);
         else okButton.setText(mOkResid);
+        if(mOkEms != -1){
+            okButton.setEms(mOkEms);
+        }
 
         Button cancelButton = view.findViewById(R.id.mdtp_cancel);
         cancelButton.setOnClickListener(new OnClickListener() {
@@ -442,6 +447,10 @@ public class DatePickerDialog extends NegativeDialogFragment implements
         cancelButton.setTypeface(TypefaceHelper.get(activity, buttonTypeface));
         if (mCancelString != null) cancelButton.setText(mCancelString);
         else cancelButton.setText(mCancelResid);
+        if(mCancelEms != -1){
+            cancelButton.setEms(mCancelEms);
+        }
+
         if(cancelInvokeNegative){
             cancelButton.setVisibility(isNegativeable() ? View.VISIBLE : View.GONE);
         }
@@ -459,10 +468,10 @@ public class DatePickerDialog extends NegativeDialogFragment implements
         // Buttons can have a different color
         if (mOkColor != -1) okButton.setTextColor(mOkColor);
         else okButton.setTextColor(mAccentColor);
-        if(mOkEms != -1)  okButton.setEms(mOkEms);
         if (mCancelColor != -1) cancelButton.setTextColor(mCancelColor);
         else cancelButton.setTextColor(mAccentColor);
-        if(mCancelEms != -1)  cancelButton.setEms(mCancelEms);
+
+
         if (getDialog() == null) {
             view.findViewById(R.id.mdtp_done_background).setVisibility(View.GONE);
         }
@@ -936,8 +945,8 @@ public class DatePickerDialog extends NegativeDialogFragment implements
         mOkResid = okResid;
     }
 
-    public void setOkEms(int maxEms){
-        this.mOkEms = maxEms;
+    public void setOkEms(int ems){
+        this.mOkEms = ems;
     }
 
     /**
@@ -961,8 +970,8 @@ public class DatePickerDialog extends NegativeDialogFragment implements
         mCancelResid = cancelResid;
     }
 
-    public void setCancelEms(int maxEms){
-        this.mCancelEms = maxEms;
+    public void setCancelEms(int ems){
+        this.mCancelEms = ems;
     }
 
     /**
