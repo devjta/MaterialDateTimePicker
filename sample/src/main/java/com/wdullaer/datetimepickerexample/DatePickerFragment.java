@@ -104,6 +104,9 @@ public class DatePickerFragment extends Fragment implements DatePickerDialog.OnD
                     );
                 }
                 dpd.setThemeDark(modeDarkDate.isChecked());
+//                dpd.setOkText("kasdjfjasfjksdajfl asjölfksjdölf jsakfdj ljasdlfj askdfjlsafjösafjlsfkjsöfljsflsfjsölfjlksjfl");
+                dpd.setCancelText("jaskdfjöjskafjlas jflksdj !!!ajsödfj lsdajfksjflj kjflöskjflö jflksja fsödfj aksdfj lkasjfd jasdj flkajsd fljlaödsjf klsjl afjsdklfj lkasfj lasdjlf PFERD HUFE GLOCKE GASTON BLABLA ");
+                dpd.setCancelEms(40);
                 dpd.vibrate(vibrateDate.isChecked());
                 dpd.dismissOnPause(dismissDate.isChecked());
                 dpd.showYearPickerFirst(showYearFirst.isChecked());
