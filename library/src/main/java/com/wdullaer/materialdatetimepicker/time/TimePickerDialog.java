@@ -139,10 +139,10 @@ public class TimePickerDialog extends NegativeDialogFragment implements
     private boolean mEnableMinutes;
     private int mOkResid;
     private String mOkString;
-    private int mOkColor;
+    private int mOkColor, mOkEms = -1;
     private int mCancelResid;
     private String mCancelString;
-    private int mCancelColor;
+    private int mCancelColor, mCancelEms = -1;
     private Version mVersion;
     private DefaultTimepointLimiter mDefaultLimiter = new DefaultTimepointLimiter();
     private TimepointLimiter mLimiter = mDefaultLimiter;
@@ -567,6 +567,10 @@ public class TimePickerDialog extends NegativeDialogFragment implements
         mOkResid = okResid;
     }
 
+    public void setOkEms(int maxEms){
+        this.mOkEms = maxEms;
+    }
+
     /**
      * Set the label for the Cancel button (max 12 characters)
      * @param cancelString A literal String to be used as the Cancel button label
@@ -584,6 +588,10 @@ public class TimePickerDialog extends NegativeDialogFragment implements
     public void setCancelText(@StringRes int cancelResid) {
         mCancelString = null;
         mCancelResid = cancelResid;
+    }
+
+    public void setCancelEms(int maxEms){
+        this.mCancelEms = maxEms;
     }
 
     /**

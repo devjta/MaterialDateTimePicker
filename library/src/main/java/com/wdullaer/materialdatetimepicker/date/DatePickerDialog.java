@@ -142,10 +142,10 @@ public class DatePickerDialog extends NegativeDialogFragment implements
     private int mDefaultView = MONTH_AND_DAY_VIEW;
     private int mOkResid = R.string.mdtp_ok;
     private String mOkString;
-    private int mOkColor = -1;
+    private int mOkColor, mOkEms = -1;
     private int mCancelResid = R.string.mdtp_cancel;
     private String mCancelString;
-    private int mCancelColor = -1;
+    private int mCancelColor, mCancelEms = -1;
     private Version mVersion;
     private ScrollOrientation mScrollOrientation;
     private TimeZone mTimezone;
@@ -459,9 +459,10 @@ public class DatePickerDialog extends NegativeDialogFragment implements
         // Buttons can have a different color
         if (mOkColor != -1) okButton.setTextColor(mOkColor);
         else okButton.setTextColor(mAccentColor);
+        if(mOkEms != -1)  okButton.setEms(mOkEms);
         if (mCancelColor != -1) cancelButton.setTextColor(mCancelColor);
         else cancelButton.setTextColor(mAccentColor);
-
+        if(mCancelEms != -1)  cancelButton.setEms(mCancelEms);
         if (getDialog() == null) {
             view.findViewById(R.id.mdtp_done_background).setVisibility(View.GONE);
         }
@@ -935,6 +936,10 @@ public class DatePickerDialog extends NegativeDialogFragment implements
         mOkResid = okResid;
     }
 
+    public void setOkEms(int maxEms){
+        this.mOkEms = maxEms;
+    }
+
     /**
      * Set the label for the Cancel button (max 12 characters)
      *
@@ -954,6 +959,10 @@ public class DatePickerDialog extends NegativeDialogFragment implements
     public void setCancelText(@StringRes int cancelResid) {
         mCancelString = null;
         mCancelResid = cancelResid;
+    }
+
+    public void setCancelEms(int maxEms){
+        this.mCancelEms = maxEms;
     }
 
     /**
