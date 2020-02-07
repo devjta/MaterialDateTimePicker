@@ -457,6 +457,7 @@ public class DatePickerDialog extends NegativeDialogFragment implements
         else {
             cancelButton.setVisibility(isCancelable() ? View.VISIBLE : View.GONE);
         }
+        okButton.setVisibility(shouldHideOkButton() ? View.GONE : View.VISIBLE);
 
         // If an accent color has not been set manually, get it from the context
         if (mAccentColor == -1) {

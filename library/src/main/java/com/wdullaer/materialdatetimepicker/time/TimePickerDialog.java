@@ -807,6 +807,7 @@ public class TimePickerDialog extends NegativeDialogFragment implements
         else {
             mCancelButton.setVisibility(isCancelable() ? View.VISIBLE : View.GONE);
         }
+        mOkButton.setVisibility(shouldHideOkButton() ? View.GONE : View.VISIBLE);
 
         // Enable or disable the AM/PM view.
         if (mIs24HourMode) {

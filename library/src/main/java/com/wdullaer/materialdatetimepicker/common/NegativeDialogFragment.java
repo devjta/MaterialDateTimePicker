@@ -10,6 +10,7 @@ public abstract class NegativeDialogFragment extends DialogFragment {
     protected DialogInterface.OnClickListener mOnNegativeListener;
     protected boolean cancelInvokeNegative = false;
     protected boolean negativeAble = false;
+    protected boolean hideOkButton = false;
 
     public void notifyNegativeListener(){
         if(mOnNegativeListener != null){
@@ -40,4 +41,18 @@ public abstract class NegativeDialogFragment extends DialogFragment {
         return negativeAble;
     }
 
+    /**
+     *
+     * @param hideOkButton
+     */
+    public void setHideOkButton(boolean hideOkButton){
+        this.hideOkButton = hideOkButton;
+    }
+
+    /**
+     * Return the current value of {@link #setHideOkButton(boolean)}.
+     */
+    public boolean shouldHideOkButton(){
+        return hideOkButton;
+    }
 }
