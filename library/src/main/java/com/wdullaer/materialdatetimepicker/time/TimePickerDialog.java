@@ -651,6 +651,7 @@ public class TimePickerDialog extends NegativeDialogFragment implements
             mDismissOnPause = savedInstanceState.getBoolean(KEY_DISMISS);
             mEnableSeconds = savedInstanceState.getBoolean(KEY_ENABLE_SECONDS);
             mEnableMinutes = savedInstanceState.getBoolean(KEY_ENABLE_MINUTES);
+            mAutoDismiss = savedInstanceState.getBoolean(KEY_AUTO_DISMISS);
             mOkResid = savedInstanceState.getInt(KEY_OK_RESID);
             mOkString = savedInstanceState.getString(KEY_OK_STRING);
             mOkColor = savedInstanceState.getInt(KEY_OK_COLOR);
@@ -1133,6 +1134,7 @@ public class TimePickerDialog extends NegativeDialogFragment implements
             }
             outState.putString(KEY_TITLE, mTitle);
             outState.putBoolean(KEY_THEME_DARK, mThemeDark);
+            outState.putBoolean(KEY_AUTO_DISMISS, mAutoDismiss);
             outState.putBoolean(KEY_THEME_DARK_CHANGED, mThemeDarkChanged);
             outState.putInt(KEY_ACCENT, mAccentColor);
             outState.putBoolean(KEY_VIBRATE, mVibrate);
@@ -1173,11 +1175,23 @@ public class TimePickerDialog extends NegativeDialogFragment implements
 
             String announcement = mSelectHours + ". " + mTimePicker.getMinutes();
             Utils.tryAccessibilityAnnounce(mTimePicker, announcement);
-        } else if(index == MINUTE_INDEX && mEnableSeconds) {
+        } else if(index == HOUR_INDEX && !mEnableMinutes && mAutoDismiss){
+            notifyOnDateListener();
+            dismiss();
+        }
+        else if(index == MINUTE_INDEX && mEnableSeconds) {
             setCurrentItemShowing(SECOND_INDEX, true, true, false);
 
             String announcement = mSelectMinutes+". " + mTimePicker.getSeconds();
             Utils.tryAccessibilityAnnounce(mTimePicker, announcement);
+        }
+        else if(index == MINUTE_INDEX && !mEnableSeconds && mAutoDismiss){
+            notifyOnDateListener();
+            dismiss();
+        }
+        else if(index == SECOND_INDEX && mAutoDismiss){
+            notifyOnDateListener();
+            dismiss();
         }
     }
 

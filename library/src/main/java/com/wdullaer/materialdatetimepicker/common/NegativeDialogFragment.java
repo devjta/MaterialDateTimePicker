@@ -7,10 +7,12 @@ import android.content.DialogInterface;
  * Created by taschekj on 11.09.18.
  */
 public abstract class NegativeDialogFragment extends DialogFragment {
+    protected static final String KEY_AUTO_DISMISS = "auto_dismiss";
     protected DialogInterface.OnClickListener mOnNegativeListener;
     protected boolean cancelInvokeNegative = false;
     protected boolean negativeAble = false;
     protected boolean hideOkButton = false;
+    protected boolean mAutoDismiss = false;
 
     public void notifyNegativeListener(){
         if(mOnNegativeListener != null){
@@ -55,4 +57,15 @@ public abstract class NegativeDialogFragment extends DialogFragment {
     public boolean shouldHideOkButton(){
         return hideOkButton;
     }
+
+    /**
+     * Set whether the picker should dismiss itself when a day or full time is selected
+     *
+     * @param autoDismiss true if the dialog should dismiss itself when a day or full time is selected
+     */
+    @SuppressWarnings("unused")
+    public void autoDismiss(boolean autoDismiss) {
+        mAutoDismiss = autoDismiss;
+    }
+
 }

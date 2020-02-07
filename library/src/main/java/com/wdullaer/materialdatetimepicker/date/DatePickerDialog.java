@@ -89,7 +89,6 @@ public class DatePickerDialog extends NegativeDialogFragment implements
     private static final String KEY_ACCENT = "accent";
     private static final String KEY_VIBRATE = "vibrate";
     private static final String KEY_DISMISS = "dismiss";
-    private static final String KEY_AUTO_DISMISS = "auto_dismiss";
     private static final String KEY_DEFAULT_VIEW = "default_view";
     private static final String KEY_TITLE = "title";
     private static final String KEY_OK_RESID = "ok_resid";
@@ -138,7 +137,6 @@ public class DatePickerDialog extends NegativeDialogFragment implements
     private int mAccentColor = -1;
     private boolean mVibrate = true;
     private boolean mDismissOnPause = false;
-    private boolean mAutoDismiss = false;
     private int mDefaultView = MONTH_AND_DAY_VIEW;
     private int mOkResid = R.string.mdtp_ok;
     private String mOkString;
@@ -656,16 +654,6 @@ public class DatePickerDialog extends NegativeDialogFragment implements
      */
     public void dismissOnPause(boolean dismissOnPause) {
         mDismissOnPause = dismissOnPause;
-    }
-
-    /**
-     * Set whether the picker should dismiss itself when a day is selected
-     *
-     * @param autoDismiss true if the dialog should dismiss itself when a day is selected
-     */
-    @SuppressWarnings("unused")
-    public void autoDismiss(boolean autoDismiss) {
-        mAutoDismiss = autoDismiss;
     }
 
     /**
